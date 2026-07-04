@@ -1,37 +1,48 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Cinzel: monumental, ancient feel for headers
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Inter: modern readability for body text
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "Kronika e Shqiptarëve | A Chronicle of Albanian History",
+  description:
+    "An interactive journey through Albanian history — from the Pelasgians and Illyrians to Skanderbeg, the National Awakening, and modern Kosovo & Albania.",
+  keywords: [
+    "Albanian history",
+    "Pelasgians",
+    "Illyrians",
+    "Dardanians",
+    "Skanderbeg",
+    "League of Lezha",
+    "League of Prizren",
+    "Kosovo independence",
+    "Shqipëria",
+    "Arbëria",
+  ],
+  authors: [{ name: "Kronika e Shqiptarëve" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Kronika e Shqiptarëve | A Chronicle of Albanian History",
+    description:
+      "An interactive journey through Albanian history — from the Pelasgians to modern Kosovo.",
+    siteName: "Kronika e Shqiptarëve",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
   },
 };
 
@@ -43,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${cinzel.variable} ${inter.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

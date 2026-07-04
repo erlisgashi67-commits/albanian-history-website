@@ -6,8 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-cinzel);
+  --font-mono: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -45,37 +46,48 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /* Albanian flag palette: deep crimson, stark black, parchment off-white */
+  --crimson: #E41E20;
+  --crimson-deep: #b31618;
+  --crimson-dark: #7a0f11;
+  --ink: #000000;
+  --ink-soft: #0a0a0a;
+  --parchment: #F9F7F2;
+  --parchment-warm: #f3efe6;
+  --parchment-dark: #e8e2d4;
+  --gold: #c9a227;
+
+  --background: oklch(0.98 0.005 60);          /* parchment off-white */
+  --foreground: oklch(0.18 0.01 60);           /* near-black ink */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.18 0.01 60);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.18 0.01 60);
+  --primary: oklch(0.55 0.22 27);              /* crimson red */
+  --primary-foreground: oklch(0.98 0.005 60);
+  --secondary: oklch(0.95 0.008 60);
+  --secondary-foreground: oklch(0.18 0.01 60);
+  --muted: oklch(0.95 0.008 60);
+  --muted-foreground: oklch(0.45 0.01 60);
+  --accent: oklch(0.55 0.22 27);
+  --accent-foreground: oklch(0.98 0.005 60);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
+  --border: oklch(0.88 0.01 60);
+  --input: oklch(0.9 0.01 60);
+  --ring: oklch(0.55 0.22 27);
+  --chart-1: oklch(0.55 0.22 27);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.985 0.005 60);
+  --sidebar-foreground: oklch(0.18 0.01 60);
+  --sidebar-primary: oklch(0.55 0.22 27);
+  --sidebar-primary-foreground: oklch(0.98 0.005 60);
+  --sidebar-accent: oklch(0.95 0.008 60);
+  --sidebar-accent-foreground: oklch(0.18 0.01 60);
+  --sidebar-border: oklch(0.88 0.01 60);
+  --sidebar-ring: oklch(0.55 0.22 27);
 }
 
 .dark {
@@ -118,5 +130,119 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cinzel), Georgia, serif;
   }
 }
+
+/* ===== Albanian History custom utilities ===== */
+
+/* Parchment paper texture using layered gradients */
+.texture-parchment {
+  background-color: #F9F7F2;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(180, 140, 80, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(120, 80, 40, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(200, 170, 120, 0.03) 0%, transparent 70%);
+}
+
+/* Subtle grain / noise overlay to simulate aged paper */
+.texture-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Crimson banner gradient */
+.bg-crimson-banner {
+  background: linear-gradient(135deg, #E41E20 0%, #b31618 50%, #7a0f11 100%);
+}
+
+/* Dark ink gradient for hero / dark sections */
+.bg-ink {
+  background: linear-gradient(180deg, #0a0a0a 0%, #000000 50%, #0a0a0a 100%);
+}
+
+/* Gold hairline divider */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #c9a227 20%, #c9a227 80%, transparent 100%);
+}
+
+/* Scroll-triggered fade-in (toggled by IntersectionObserver) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children delays */
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+/* Hero eagle glow pulse */
+@keyframes eagle-glow {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(228, 30, 32, 0.35)); }
+  50% { filter: drop-shadow(0 0 28px rgba(228, 30, 32, 0.7)); }
+}
+.eagle-pulse {
+  animation: eagle-glow 4s ease-in-out infinite;
+}
+
+/* Slow zoom for hero background */
+@keyframes slow-zoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.18); }
+}
+.animate-slow-zoom {
+  animation: slow-zoom 22s ease-out forwards;
+}
+
+/* Custom scrollbar for long lists */
+.scroll-styled::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-styled::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+.scroll-styled::-webkit-scrollbar-thumb {
+  background: rgba(228, 30, 32, 0.5);
+  border-radius: 4px;
+}
+.scroll-styled::-webkit-scrollbar-thumb:hover {
+  background: rgba(228, 30, 32, 0.8);
+}
+
+/* Nav active link underline */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #E41E20;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
